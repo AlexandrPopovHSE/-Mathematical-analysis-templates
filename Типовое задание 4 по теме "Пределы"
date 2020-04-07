@@ -1,0 +1,249 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+    
+     Random rnd = new Random();
+     
+     int type=rnd.Next(1,9);
+     string question="", x0="", correct_answer="";
+     
+     
+     if (type == 1){
+         
+         int k=rnd.Next(0,2), a=rnd.Next(2,6), b=rnd.Next(0,4), c=0;
+         
+        switch(b){
+            case 0:
+            c=1;
+            break;
+            case 1:
+            c=a;
+            break;
+            case 2:
+            c=a*a;
+            break;
+            case 3:
+            c=a*a*a;
+            break;
+        }
+         
+         if (k == 0){
+             question="("+a+"**("+b+"+(cos(x))**2)-"+c+")/(log(sin(x)))";
+             x0="pi/2";
+         }
+         else{
+             question="("+a+"**("+b+"+(sin(x))**2)-"+c+")/(log(cos(x)))";
+             x0="0";
+         }
+         
+         
+     }
+     
+     if (type == 2){
+         int x00=rnd.Next(2,10), b=0, k=rnd.Next(0,2);
+         x0=x00+"";
+         b=1-x00;
+         if (k==0){
+             question="(tan(x)-tan("+x0+"))/(sin(log(x"+b+")))";
+         }
+         else{
+             question="(sin(x)-sin("+x0+"))/(sin(log(x"+b+")))";
+         }
+     }
+     
+     if (type == 3){
+         int k=rnd.Next(0,2);
+         if (k == 0){
+             x0="pi/6";
+             question="(log(sin(3*x)))/(6*x-pi)**2";
+         }
+         else{
+             x0="pi/4";
+             question="(log(sin(2*x)))/(4*x-pi)**2";
+         }
+         
+     }
+     
+     if (type == 4){
+         int a=rnd.Next(2,10),c=rnd.Next(2,10),b=rnd.Next(1,4);
+         x0="0";
+         if (b == 1){
+             question="(log(1-sin("+a+"*x)))/(1-cos("+c+"*x))";
+         }
+         else{
+             question="(log(1-sin("+a+"*x**"+b+")))/(1-cos("+c+"*x))";
+         }
+     }
+     
+     if (type == 5){
+         int a=rnd.Next(2,6),k=rnd.Next(2,6), k0=rnd.Next(0,4), d=1-k;
+         x0="1/"+a;
+         question="(log("+k*a+"*x"+d+"))/";
+         switch (k0){
+             case 0:
+             question+="(sqrt(1+sin("+a+"*pi*x))-1)";
+             break;
+             case 1:
+             question+="(sqrt(1-sin("+a+"*pi*x))-1)";
+             break;
+             case 2:
+             if (a % 2 == 0){
+                 a=a/2;
+                 question+="(sqrt(1+cos("+a+"*pi*x))-1)";
+             }
+             else{
+                 question+="(sqrt(1+cos("+a+"/2*pi*x))-1)";
+             }
+             break;
+             case 3:
+             if (a % 2 == 0){
+                 a=a/2;
+                 question+="(sqrt(1-cos("+a+"*pi*x))-1)";
+             }
+             else{
+                 question+="(sqrt(1-cos("+a+"/2*pi*x))-1)";
+             }
+             break;
+         }
+     }
+     
+     if (type == 6){
+         int a=rnd.Next(2,6),x00=rnd.Next(2,6), k=rnd.Next(0,2);
+         x0=x00+"";
+         if (k == 0){
+             question="("+a+"**(sin(pi*x))-1)/";
+         }
+         else{
+             question="("+a+"**(cos(pi/"+2*x00+"*x))-1)/";
+         }
+         question+="(log("+koef(1,"x**3",true)+koef(3+x00,"x**2",false)+koef(3-3*x00,"x",false)+koef(-3*x00+1,"",false)+"))";
+     }
+     
+     if (type == 7){
+         int x00=rnd.Next(1,4),k=rnd.Next(1,5),x1=x00+rnd.Next(1,4), k0=rnd.Next(0,2),b=x00+x1,c=rnd.Next(1,3), d=x00*x1+c;
+         x0=x00+"";
+         if (k0 == 0){
+             question="(sin(log("+koef(k,"x",true)+koef(1-x00*k,"",false)+")))/";
+         }
+         else{
+             question="(tan(log("+koef(k,"x",true)+koef(1-x00*k,"",false)+")))/";
+         }
+         question+="(exp(x**2+"+d+")-exp("+b+"*x"+koef(c,"",false)+"))";
+     }
+     
+     if (type == 8){
+         int k=rnd.Next(0,3);
+         x0="oo";
+         switch(k){
+             case 0:
+             question="x*log(tan(pi/4+pi/x))";
+             break;
+             case 1:
+             question="x*log(cos(pi/x))";
+             break;
+             case 2:
+             question="x*log(sin(pi/2+pi/x))";
+             break;
+         }
+     }
+     
+    correct_answer = string.Format("limit({0}, x, {1})", question, x0);
+    question = "\\displaystyle " + Helper.Latex(correct_answer, false);
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
