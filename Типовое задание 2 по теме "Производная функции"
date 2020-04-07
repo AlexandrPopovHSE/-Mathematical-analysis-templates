@@ -1,0 +1,271 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+    
+    static string fsin(string func){
+        return "sin("+func+")";
+    }
+    static string fcos(string func){
+        return "cos("+func+")";
+    }
+    static string ftan(string func){
+        return "tan("+func+")";
+    }
+    static string fcot(string func){
+        return "cot("+func+")";
+    }
+    static string fasin(string func){
+        return "asin("+func+")"; 
+    }
+     static string facos(string func){
+        return "acos("+func+")";
+    }
+    static string fatan(string func){
+        return "atan("+func+")";
+    }
+    static string facot(string func){
+        return "acot("+func+")";
+    }
+    static string flog(string func){ 
+        return "log("+func+")";
+    }
+    static string fpower(string func, string power){
+        return "("+func+")**("+power+")";
+    }
+    static string fsqrt(string func){
+        return "sqrt("+func+")";
+    }
+    static string fexp(string func){
+        return "exp("+func+")";
+    }
+    static string fpolynom(){
+        Random rnd = new Random();
+        int a=rnd.Next(0,9),b=rnd.Next(1,16),c=rnd.Next(0,26);
+        
+        return ""+koef(a,"t**2",true)+koef(b,"t",false)+koef(c,"",false);
+    }
+    static string fpolynom2(){
+        Random rnd = new Random();
+        int a=rnd.Next(3,9),b=rnd.Next(0,15),c=rnd.Next(0,17);
+        
+        return ""+koef(a,"t**2",true)+koef(b,"t",false)+koef(c,"",false);
+    }
+    static string fdiv(string num, string den){
+        return "("+num+")/("+den+")";
+    }
+   
+    
+    
+    
+     Random rnd = new Random();
+     string question="",correct_answer="",point="";
+     int k=rnd.Next(0,2);
+     
+     if (k == 0){
+         string x,y,x_,y_,y__;
+     int[] num = new int[2] {rnd.Next(1,12), rnd.Next(1,12)};
+     string[] func = new string[2];
+     
+     for(int i=0; i<2;i++){
+             switch (num[i])
+      {
+          case 1:
+              func[i]=fsin("t");
+              break;
+          case 2:
+              func[i]=fcos("t");
+              break;
+          case 3:
+              func[i]=ftan("t");
+              break;
+          case 4:
+              func[i]=fcot("t+pi/2");
+              break;
+          case 5:
+              func[i]=fasin("t");
+              break;
+          case 6:
+              func[i]=facos("t");
+              break;
+          case 7:
+              func[i]=fatan("t");
+              break;
+          case 8:
+              func[i]=facot("t");
+              break;
+          case 9:
+              func[i]=flog("t+1");
+              break;
+          case 10:
+             func[i]=fsqrt("t+1");
+              break;
+          case 11:
+              func[i]=fexp("t");
+              break;
+          
+      }
+         }
+     
+     x=fpolynom()+"+"+func[0];
+     y=fpolynom2()+"+"+func[1];
+     point="t_0=0";
+     x_=Helper.Eval(string.Format("diff(({0}), t)",x));
+     y_=Helper.Eval(string.Format("(diff(({0}), t))/({1})",y,x_));
+     y__=Helper.Eval(string.Format("(diff(({0}), t))/({1})",y_,x_));
+     
+    y_=Helper.Eval(string.Format("({0}).subs(t,0)",y_));
+    y__=Helper.Eval(string.Format("({0}).subs(t,0)",y__));
+ 
+     correct_answer = Helper.Eval(string.Format("simplify(({0})+({1}))",y_,y__));
+     question = "\\displaystyle \\begin{cases}" + "x="+Helper.Latex(x, false) + ",\\\\ y=" + 
+     Helper.Latex(y, false) + "\\end{cases}";
+     }
+     
+     if (k == 1){
+         string f="";
+         int v=rnd.Next(0,4);
+         
+         if (v==0){
+             
+             f="exp("+koef(rnd.Next(1,5),"x",true)+")+exp("+koef(rnd.Next(1,5),"y",true)+")"+koef(rnd.Next(0,4),"x",false)+koef(rnd.Next(0,4),"y",false)+koef(rnd.Next(0,4),"x*y",false);
+             point="(x_0,y_0)=(0,0)";
+             
+             
+             
+         }
+         if (v==1){
+             
+             f=koef(rnd.Next(1,5),"sin(x)",true)+koef(rnd.Next(1,5),"cos(y)",false)+koef(rnd.Next(1,4),"x*y",false);
+             
+             point="(x_0,y_0)=(0,\\pi/2)";
+         }
+         if (v==2){
+             
+             f="log("+koef(rnd.Next(1,4),"x",true)+")+log("+koef(rnd.Next(1,4),"y",true)+")"+koef(rnd.Next(0,4),"x",false)+koef(rnd.Next(0,4),"y",false)+koef(rnd.Next(0,4),"x*y",false);
+             
+             point="(x_0,y_0)=(1,1)";
+         }
+         if (v==3){
+             int k1 = rnd.Next(1,6);
+             int k2 = rnd.Next(1,6);
+
+             f=koef(k1,"x**"+rnd.Next(2,4),true)+koef(k2,"y**"+
+             rnd.Next(3,4),false)+koef(1,"x*y",false);
+             
+             point="(x_0,y_0)=(1,1)";
+         }
+         
+         question=Helper.Latex(f,false)+"=0";
+         
+         string fx,fy,df,dfx,dfy,ddf;
+         fx=Helper.Eval(string.Format("diff({0}, x)",f));
+         fy=Helper.Eval(string.Format("diff({0}, y)",f));
+         df=Helper.Eval(string.Format("-1*({0})/({1})",fx,fy));
+         dfx=Helper.Eval(string.Format("diff({0}, x)",df));
+         dfy=Helper.Eval(string.Format("diff({0}, y)",df));
+         ddf=Helper.Eval(string.Format("-1*({0})/({1})",dfx,dfy));
+         
+         if (v==0){
+             correct_answer=Helper.Eval("("+df+").subs({x:0,y:0})+("+ddf+").subs({x:0,y:0})");
+         }
+         if (v==1){
+             correct_answer=Helper.Eval("("+df+").subs({x:0,y:pi/2})+("+ddf+").subs({x:0,y:pi/2})");
+         }
+         if (v==2){
+             correct_answer=Helper.Eval("("+df+").subs({x:1,y:1})+("+ddf+").subs({x:1,y:1})");
+         }
+         if (v==3){
+             correct_answer=Helper.Eval("("+df+").subs({x:1,y:1})+("+ddf+").subs({x:1,y:1})");
+         }
+         
+         
+     }
+     
+     
+     
+     
+     
