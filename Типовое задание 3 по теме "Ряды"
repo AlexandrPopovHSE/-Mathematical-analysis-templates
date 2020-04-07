@@ -1,0 +1,136 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+
+string question,correct_answer,func,alpha,beta,mult;
+Random rnd = new Random();
+int k=rnd.Next(0,2);
+int a,b,c,d;
+
+c=rnd.Next(1,12);
+d=rnd.Next(1,8);
+b=rnd.Next(1,8);
+if (k == 0){
+    a=rnd.Next(1,b+(b*c/d)+1);
+}
+else{
+    a=b+(b*c/d)+rnd.Next(2,5);
+}
+alpha=Helper.Eval(string.Format("simplify({0}/{1})",c,d));
+beta=Helper.Eval(string.Format("simplify({0}/{1})",a,b));
+
+alpha=string.Format("({0})**({1})",koef(rnd.Next(1,4),"n",true)+koef(rnd.Next(1,6),"",false),alpha);
+beta=string.Format("1/(({0})**({1}))",koef(rnd.Next(1,4),"n",true)+koef(rnd.Next(1,6),"",false),beta);
+
+int temp=rnd.Next(0,7);
+switch (temp){
+    case 0:
+    mult=string.Format("sin({0})",beta);
+    break;
+    case 1:
+    mult=string.Format("tan({0})",beta);
+    break;
+    case 2:
+    mult=string.Format("asin({0})",beta);
+    break;
+    case 3:
+    mult=string.Format("atan({0})",beta);
+    break;
+    case 4:
+    mult=string.Format("exp({0})-1",beta);
+    break;
+    case 5:
+    mult=string.Format("log(1+{0})",beta);
+    break;
+    case 6:
+    mult=string.Format("(1+{0})**{1}-1",beta,rnd.Next(2,6));
+    break;
+}
+
+func=string.Format("({0})*({1})",alpha,mult);
+question="\\sum\\limits_{n=1}^{\\infty}"+" "+Helper.Latex(func,false);
+correct_answer=k+""; 
