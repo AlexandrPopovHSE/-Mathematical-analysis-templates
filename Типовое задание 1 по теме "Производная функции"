@@ -1,0 +1,474 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+    
+    static string fsin(string func){
+        return "sin("+func+")";
+    }
+    static string fcos(string func){
+        return "cos("+func+")";
+    }
+    static string ftan(string func){
+        return "tan("+func+")";
+    }
+    static string fcot(string func){
+        return "cot("+func+")";
+    }
+    static string fasin(string func){
+        return "asin("+func+")"; 
+    }
+     static string facos(string func){
+        return "acos("+func+")";
+    }
+    static string fatan(string func){
+        return "atan("+func+")";
+    }
+    static string facot(string func){
+        return "acot("+func+")";
+    }
+    static string flog(string func){ 
+        return "log("+func+")";
+    }
+    static string fpower(string func, string power){
+        return "("+func+")**("+power+")";
+    }
+    static string fsqrt(string func){
+        return "sqrt("+func+")";
+    }
+    static string fexp(string func){
+        return "exp("+func+")";
+    }
+    static string fpolynom(){
+        Random rnd = new Random();
+        int a=rnd.Next(0,9),b=rnd.Next(0,16),c=rnd.Next(1,26);
+        
+        return ""+koef(a,"x**2",true)+koef(b,"x",false)+koef(c,"",false);
+    }
+    static string fdiv(string num, string den){
+        return "("+num+")/("+den+")";
+    }
+   
+    
+    
+    
+     Random rnd = new Random();
+     string question="",correct_answer="";
+     
+     int dif=rnd.Next(1,4);
+     
+     if (dif == 1){
+         int k=rnd.Next(1,5);
+         int[] num = new int[4] {rnd.Next(1,14),rnd.Next(1,14),rnd.Next(1,14),rnd.Next(1,14)};
+         string[] func = new string[4];
+         
+         for(int i=0; i<4;i++){
+             switch (num[i])
+      {
+          case 1:
+              func[i]=fsin("x");
+              break;
+          case 2:
+              func[i]=fcos("x");
+              break;
+          case 3:
+              func[i]=ftan("x");
+              break;
+          case 4:
+              func[i]=fcot("x");
+              break;
+          case 5:
+              func[i]=fasin("x");
+              break;
+          case 6:
+              func[i]=facos("x");
+              break;
+          case 7:
+              func[i]=fatan("x");
+              break;
+          case 8:
+              func[i]=facot("x");
+              break;
+          case 9:
+              func[i]=flog("x");
+              break;
+          case 10:
+              func[i]=fpower(Convert.ToString(rnd.Next(2,10)), "x");
+              break;
+          case 11:
+             func[i]=fsqrt("x");
+              break;
+          case 12:
+              func[i]=fexp("x");
+              break;
+          case 13:
+              func[i]=fpolynom();
+              break;
+          
+      }
+         }
+         
+         
+             func[0]=func[0]+"+"+func[1];
+             func[1]=func[2]+"+"+func[3];
+         
+         switch (k)
+      {
+          case 1:
+               question=fsin(fdiv(func[0],func[1]));
+              break;
+          case 2:
+               question=fcos(fdiv(func[0],func[1]));
+              break;
+          case 3:
+               question=fexp(fdiv(func[0],func[1]));
+              break;
+          case 4:
+               question=fsqrt(fdiv(func[0],func[1]));
+              break;
+      }
+         
+         
+         
+         
+     }
+     
+     if (dif == 2){
+         int k=rnd.Next(1,4);
+         string a="",b="";
+         string[] func=new string[3];
+         int[] num=new int[3] {rnd.Next(1,14),rnd.Next(1,14),rnd.Next(1,14)};
+         
+         for(int i=0; i<3;i++){
+             switch (num[i])
+      {
+          case 1:
+              func[i]=fsin("x");
+              break;
+          case 2:
+              func[i]=fcos("x");
+              break;
+          case 3:
+              func[i]=ftan("x");
+              break;
+          case 4:
+              func[i]=fcot("x");
+              break;
+          case 5:
+              func[i]=fasin("x");
+              break;
+          case 6:
+              func[i]=facos("x");
+              break;
+          case 7:
+              func[i]=fatan("x");
+              break;
+          case 8:
+              func[i]=facot("x");
+              break;
+          case 9:
+              func[i]=flog("x");
+              break;
+          case 10:
+              func[i]=fpower(Convert.ToString(rnd.Next(2,10)), "x");
+              break;
+          case 11:
+             func[i]=fsqrt("x");
+              break;
+          case 12:
+              func[i]=fexp("x");
+              break;
+          case 13:
+              func[i]=fpolynom();
+              break;
+          
+      }
+         }
+         
+         b=func[0];
+         if (k==1){
+             a=func[1]+"+"+func[2];
+         }
+         if (k==2){
+             a=fdiv(func[1],func[2]);
+         }
+         if (k==3){
+             switch (rnd.Next(1,13))
+      {
+          case 1:
+              a=fsin(func[1]);
+              break;
+          case 2:
+              a=fcos(func[1]);
+              break;
+          case 3:
+              a=ftan(func[1]);
+              break;
+          case 4:
+              a=fcot(func[1]);
+              break;
+          case 5:
+              a=fasin(func[1]);
+              break;
+          case 6:
+              a=facos(func[1]);
+              break;
+          case 7:
+              a=fatan(func[1]);
+              break;
+          case 8:
+              a=facot(func[1]);
+              break;
+          case 9:
+              a=flog(func[1]);
+              break;
+          case 10:
+              a=fpower(Convert.ToString(rnd.Next(2,10)), func[1]);
+              break;
+          case 11:
+              a=fsqrt(func[1]);
+              break;
+          case 12:
+              a=fexp(func[1]);
+              break;
+          
+      }
+         }
+         
+         question=fpower(a,b);
+         
+         
+     }
+     
+     if (dif == 3){
+         int k=rnd.Next(1,4);
+         string a="",b="";
+         string[] func=new string[3];
+         int[] num=new int[3] {rnd.Next(1,14),rnd.Next(1,14),rnd.Next(1,14)};
+         
+         for(int i=0; i<3;i++){
+             switch (num[i])
+      {
+          case 1:
+              func[i]=fsin("x");
+              break;
+          case 2:
+              func[i]=fcos("x");
+              break;
+          case 3:
+              func[i]=ftan("x");
+              break;
+          case 4:
+              func[i]=fcot("x");
+              break;
+          case 5:
+              func[i]=fasin("x");
+              break;
+          case 6:
+              func[i]=facos("x");
+              break;
+          case 7:
+              func[i]=fatan("x");
+              break;
+          case 8:
+              func[i]=facot("x");
+              break;
+          case 9:
+              func[i]=flog("x");
+              break;
+          case 10:
+              func[i]=fpower(Convert.ToString(rnd.Next(2,10)), "x");
+              break;
+          case 11:
+             func[i]=fsqrt("x");
+              break;
+          case 12:
+              func[i]=fexp("x");
+              break;
+          case 13:
+              func[i]=fpolynom();
+              break;
+          
+      }
+         }
+         
+         b=func[0];
+         if (k==1){
+             a=func[1]+"+"+func[2];
+         }
+         if (k==2){
+             a=fdiv(func[1],func[2]);
+         }
+         if (k==3){
+             switch (rnd.Next(1,13))
+      {
+          case 1:
+              a=fsin(func[1]);
+              break;
+          case 2:
+              a=fcos(func[1]);
+              break;
+          case 3:
+              a=ftan(func[1]);
+              break;
+          case 4:
+              a=fcot(func[1]);
+              break;
+          case 5:
+              a=fasin(func[1]);
+              break;
+          case 6:
+              a=facos(func[1]);
+              break;
+          case 7:
+              a=fatan(func[1]);
+              break;
+          case 8:
+              a=facot(func[1]);
+              break;
+          case 9:
+              a=flog(func[1]);
+              break;
+          case 10:
+              a=fpower(Convert.ToString(rnd.Next(2,10)), func[1]);
+              break;
+          case 11:
+              a=fsqrt(func[1]);
+              break;
+          case 12:
+              a=fexp(func[1]);
+              break;
+          
+      }
+         }
+         switch (rnd.Next(1,13))
+      {
+          case 1:
+              a=fsin(a);
+              break;
+          case 2:
+              a=fcos(a);
+              break;
+          case 3:
+              a=ftan(a);
+              break;
+          case 4:
+              a=fcot(a);
+              break;
+          case 5:
+              a=fasin(a);
+              break;
+          case 6:
+              a=facos(a);
+              break;
+          case 7:
+              a=fatan(a);
+              break;
+          case 8:
+              a=facot(a);
+              break;
+          case 9:
+              a=flog(a);
+              break;
+          case 10:
+              a=fpower(Convert.ToString(rnd.Next(2,10)), a);
+              break;
+          case 11:
+              a=fsqrt(a);
+              break;
+          case 12:
+              a=fexp(a);
+              break;
+          
+      }
+         
+         question="("+a+")*("+b+")";
+         
+         
+     }
+     
+     correct_answer = string.Format("diff(({0}), x)",question);
+     question = Helper.Latex(question, false);
