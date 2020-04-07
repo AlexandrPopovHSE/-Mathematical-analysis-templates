@@ -1,0 +1,182 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+
+string question,correct_answer,func,num,den,arg;
+Random rnd = new Random();
+
+int temp=rnd.Next(0,6);
+if (temp < 2){
+    switch (temp){
+    case 0:
+    arg="log(n)";
+    break;
+    case 1:
+    arg=rnd.Next(2,10)+"**n";
+    break;
+}
+}
+else{
+    arg=koef(rnd.Next(1,4),"n",true);
+}
+temp=rnd.Next(0,4);
+switch(temp){
+    case 0:
+    num=string.Format("sin({0})",arg);
+    break;
+    case 1:
+    num=string.Format("cos({0})",arg);
+    break;
+    case 2:
+    num=string.Format("atan({0})",arg);
+    break;
+    case 3:
+    num=string.Format("acot({0})",arg);
+    break;
+}
+temp=rnd.Next(1,4);
+if (temp > 1){
+    num = koef(1,"("+num+")**"+temp,true);
+}
+num += "+"+rnd.Next(2,6);
+
+
+int k=rnd.Next(0,2);
+
+
+if (k == 0){
+  temp=rnd.Next(0,2);
+   if (temp == 0){
+       int temp1=rnd.Next(0,2);
+       if (temp1 == 0){
+           int e,f;
+           e=rnd.Next(2,5);
+           f=e+rnd.Next(1,3);
+           den="n**("+Helper.Eval(string.Format("simplify({0}/{1})",e,f))+")"+koef(rnd.Next(0,2),"sqrt(n)",false);
+       }
+       else{
+           int a,b,c,d;
+           b=rnd.Next(5,12);
+           c=rnd.Next(1,4);
+           d=rnd.Next(2,7);
+           a=b+(b*c/d);
+           den=Helper.Eval(string.Format("simplify(n**({0}/{1}))",a,b));
+           num += "+"+Helper.Eval(string.Format("simplify(n**({0}/{1}))",c,d));
+       }
+   }
+   else{
+       num += "+"+rnd.Next(2,4)+"**n";
+       den = "n**"+rnd.Next(2,6)+koef(rnd.Next(0,2),"sqrt(n)",false)+koef(rnd.Next(0,2),"log(n)",false);
+       
+   }
+}
+
+if (k == 1){
+   temp=rnd.Next(0,2);
+   if (temp == 0){
+       int temp1=rnd.Next(0,2);
+       if (temp1 == 0){
+           den="n**"+rnd.Next(2,5)+koef(rnd.Next(0,2),"sqrt(n)",false);
+       }
+       else{
+           int a,b,c,d;
+           b=rnd.Next(5,12);
+           c=rnd.Next(1,4);
+           d=rnd.Next(2,7);
+           a=b+(b*c/d)+rnd.Next(2,5);
+           den=Helper.Eval(string.Format("simplify(n**({0}/{1}))",a,b));
+           num += "+"+Helper.Eval(string.Format("simplify(n**({0}/{1}))",c,d));
+       }
+   }
+   else{
+       den=rnd.Next(2,6)+"**n"+koef(rnd.Next(0,2),"log(n)",false);
+   }
+}
+
+func=string.Format("({0})/({1})",num,den);
+question="\\sum\\limits_{n=1}^{\\infty}"+" "+Helper.Latex(func,false);
+correct_answer=k+""; 
