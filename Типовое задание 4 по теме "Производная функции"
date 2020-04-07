@@ -1,0 +1,158 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+
+
+int k;
+string question,correct_answer,cond = "x  \\geqslant 0";
+Random rnd = new Random();
+
+k = rnd.Next(0,2);
+
+if (k == 0){
+    string func;
+    int a,b,c,m,k;
+    m = rnd.Next(1,12);
+    k = rnd.Next(1,12);
+    if (m % 2 == 0){
+        m++;
+    }
+    if (k % 2 == 0){
+        k++;
+    }
+    a = rnd.Next(-8,9);
+    b = m*k;
+    c = a - ((m*m-k*k)/2);
+    
+    
+    func = "("+koef(a,"x**2",true)+koef(b,"x",false)+koef(c,"",false)+")/(x**2+1)";
+    
+string list = Helper.Eval(string.Format("solve(diff({0},x))", func));
+int len = list.Length - list.Replace(",", "").Length + 1;
+string[] numb = new string[len];
+
+for (int i = 0; i < len; i++){
+    if (Helper.Eval(string.Format("{0}[{1}] >= 0", list,i)) == "True"){
+        numb[i]=Helper.Eval(string.Format("({0}).subs(x,{1}[{2}])", func,list,i));
+    }
+    else{
+        numb[i]="-oo";
+    }
+    
+}
+string listmax = "";
+for (int i = 0; i < len; i++){
+    listmax += numb[i]+",";
+}
+listmax += Helper.Eval(string.Format("({0}).subs(x,0)", func)) + ",";
+listmax += Helper.Eval(string.Format("limit({0}, x, +oo)", func));
+question = Helper.Latex(func, false);
+correct_answer = Helper.Eval(string.Format("Max({0})", listmax));
+}
+
+if (k == 1){
+    int a,b,c;
+    a=rnd.Next(-10,11);
+    b=rnd.Next(-10,11);
+    c=rnd.Next(-10,-1);
+    string func,arg;
+    arg=koef(a+c*b*b,"",true)+koef(c,"x**2",false)+koef(2*b*c,"x",false);
+    
+    int z=rnd.Next(0,2);
+    if (z == 0){
+        func = string.Format("exp({0})",arg);
+    }
+    else{
+        func = string.Format("atan({0})",arg);
+    }
+    question = Helper.Latex(func,false);
+    correct_answer=Helper.Eval(string.Format("{0}.subs(x,{1})", func, -1*b));
+    
+}
+
+
+
