@@ -1,0 +1,165 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+    
+                Random rnd = new Random();
+                string question,correct_answer,x0,func;
+                int k=rnd.Next(1,7);
+                
+                
+                if (k == 1){
+                    x0="+oo";
+                    int a=0, b=0, c=0, d=0;
+                    a = rnd.Next(1, 3);
+                    b = rnd.Next(-7, 16);
+                    c = rnd.Next(-30, 42);
+                    d = rnd.Next(-9, 9);
+                    func="sqrt("+koef(a*a,"x**2",true)+koef(b,"x",false)+koef(c,"",false)+")"+koef(-a,"x",false)+koef(d,"",false);
+                }
+                
+                if (k == 2){
+                     x0="+oo";
+                    int a=0, b=0, c=0, d=0;
+                    a = rnd.Next(1, 3);
+                    b = rnd.Next(-7, 16);
+                    c = rnd.Next(-30, 42);
+                    d = rnd.Next(-9, 9);
+                    func="x*(sqrt("+koef(a*a,"x**2",true)+koef(b,"x",false)+koef(c,"",false)+")"+koef(-a,"x",false)+koef(d,"",false)+")";
+                }
+                
+                if (k == 3){
+                    int x00, a, b, c, d, e, q;
+                    x00 = rnd.Next(1, 5);
+                    x0=x00+"";
+                    a = rnd.Next(2, 9);
+                    if (x00 == a)
+                        {
+                        a++;
+                        }
+                    d = rnd.Next(-9, 9);
+                    q = rnd.Next(1, 13);
+                    q *= q;
+                    e = q - d * x00;
+                    c = x00 * a + e;
+                    b = -x00 - a + d;
+                    
+                    func = "(sqrt(x**2" + koef(b, "x", false) + koef(c, "", false) + ")-sqrt(" + koef(d, "x", true) 
+                    + koef(e, "", false) + "))/(x**2" + koef(-x00, "x", false) + ")";
+                }
+                
+                if (k == 4){
+                    int x00, a, b, c, d, e, q;
+                    x00 = rnd.Next(1, 5);
+                    x0=x00+"";
+                    a = rnd.Next(2, 9);
+                    if (x00 == a)
+                        {
+                        a++;
+                        }
+                    d = 0;
+                    q = rnd.Next(1, 13);
+                    q *= q;
+                    e = q - d * x00;
+                    c = x00 * a + e;
+                    b = -x00 - a + d;
+                    func = "(sqrt(x**2" + koef(b, "x", false) + koef(c, "", false) + ")-sqrt(" + koef(d, "x", true) 
+                    + koef(e, "", false) + "))/(x" + koef(-x00, "", false) + ")";
+                }
+                
+                if (k == 5){
+                    int x00=rnd.Next(1,8),c=rnd.Next(1,10),b=c*c-x00;
+                    x0=x00+"";
+                    func="(x**3-"+x00*x00*x00+")/(sqrt(x"+koef(b,"",false)+")-"+c+")";
+                }
+                
+                if (k == 6){
+                    int x00=rnd.Next(1,8),c=rnd.Next(1,10),b=c*c-x00;
+                    x0=x00+"";
+                    func="(x**2-"+x00*x00+")/(sqrt(x"+koef(b,"",false)+")-"+c+")";
+                }
+                question=Helper.Latex(string.Format("limit({0}, x, {1})",func,x0),false);
+                correct_answer=Helper.Eval(string.Format("limit({0}, x, {1})",func,x0));
