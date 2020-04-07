@@ -1,0 +1,194 @@
+Random rnd = new Random();
+ double f = 0, g = 0, sol = 0;
+            f = rnd.Next(1, 5);
+  
+            int[] x0 = new int[4] { 180, 90, 45,0};
+            int count = 0;
+            int var_of_x0 = 0;
+            var_of_x0 = rnd.Next(0, 4);
+            double radian = x0[var_of_x0] * Math.PI / 180;
+
+            if (f == 3 || f == 4)
+            {
+                if (f == 3)
+                {
+                    if (x0[var_of_x0] == 90)
+                    {
+                        x0[var_of_x0] = 0;
+                    }
+                }
+                if (f == 4)
+                {
+                    if (x0[var_of_x0] == 180|| x0[var_of_x0] == 0)
+                    {
+                        x0[var_of_x0] = 90;
+                    }
+                }
+                g = 0;
+            }
+            else
+            {
+                if (f == 1)
+                {
+                    sol = Math.Sin(radian);
+                }
+                if (f == 2)
+                {
+                    if (x0[var_of_x0] == 90)
+                    {
+                        sol = 0;
+                    }
+                    else
+                        sol = Math.Cos(radian);
+
+                }
+
+                if (sol == 0)
+                {
+                    if (f == 1)
+                    {
+                        count = 2;
+                    }
+                    if (f == 2)
+                    {
+                        count = 3;
+                    }
+                    g = f;
+                }
+                else
+                {
+                    if (x0[var_of_x0] == 45)//решить с 45
+                    {
+                      
+                        if (f == 2)
+                        {
+                           g = -1;
+                        }
+                         else
+                           g = -2;
+                        
+                    }
+                    else
+                    {
+                        g = -sol;
+                        count++;
+                    }
+                }
+
+            }
+           
+            string f_f=null;
+            if (f == 1)
+            {
+                f_f ="sin(x)";
+            }
+            if (f == 2)
+            {
+                f_f = "cos(x)";
+            }
+            if (f == 3)
+            {
+                f_f = "tan(x)";
+            }
+            if (f == 4)
+            {
+                f_f = "cot(x)";
+            }
+
+            string g_g = null;
+            if ((g == 1||g==2||g==-1||g==-2) && count!=1)
+            {
+                if (g == 1)
+                {
+                    g_g = string.Format("sin({0}*x)",count);
+                }
+                if (g == 2)
+                {
+                    g_g = string.Format("cos({0}*x)",count);
+                }
+                if (g == -1)
+                {
+                    g_g = "-sin(x)";
+                }
+                if (g == -2)
+                {
+                    g_g = "-cos(x)";
+                }
+            }
+            else
+                g_g = string.Format("{0}",g);
+
+            string chisl =string.Format("{0}+{1}",f_f,g_g);
+
+            string question = "";
+            string znam="";
+            string correct_answer = "";
+
+            if (x0[var_of_x0] == 0)
+            {
+                int c1 = 0;
+                c1= rnd.Next(1, 6);
+                int b1 = 0;
+                b1 = c1 * c1;
+                int a1 = 0;
+                a1=rnd.Next(1, 16);
+                znam = string.Format("sqrt({0}*x**2+{1})-{2}",a1,b1,c1);
+            }
+            else
+            {
+                int var_of_slog_1 = 0;
+                var_of_slog_1 = rnd.Next(1, 4);
+                int var_of_slog_2 = 0;
+                do
+                {
+                    var_of_slog_2 = rnd.Next(1, 4);
+                }
+                while (var_of_slog_2 == var_of_slog_1);
+                int a = 0;
+                int b = 0;
+                if (x0[var_of_x0] == 180)
+                {
+                    a = 1;
+                }
+                if (x0[var_of_x0] == 90)
+                {
+                    a = 2;
+                }
+                if (x0[var_of_x0] == 45)
+                {
+                    a = 4;
+                }
+                if (var_of_slog_1 == 1 || var_of_slog_2 == 1)
+                {
+                    if (var_of_slog_1 == 2 || var_of_slog_2 == 2)
+                    {
+                        b = -a * x0[var_of_x0];
+                        string b_r=string.Format("simplify({0}*pi/180)",b);
+                         znam = string.Format("{0}*x**2+{1}*x",a,b_r);
+                    }
+                    if (var_of_slog_1 == 3 || var_of_slog_2 == 3)
+                    {
+                        a = 1;
+                        b = -x0[var_of_x0];
+                        string b_r=string.Format("simplify({0}*pi/180)",b);
+                        znam = string.Format("{0}*x**2-{1}**2",a,b_r);
+                    }
+                }
+                if (var_of_slog_1 == 2 || var_of_slog_2 == 2)
+                {
+                    if (var_of_slog_1 == 3 || var_of_slog_2 == 3)
+                    {
+                        b = -a * x0[var_of_x0];
+                        string b_r=string.Format("simplify({0}*pi/180)",b);
+                        znam = string.Format("{0}*x+{1}",a,b_r);
+                    }
+                }
+
+                
+
+            }
+            question = "(" + chisl + ")" + "/" + "(" + znam + ")";
+            string rad=string.Format("simplify({0}*pi/180)",x0[var_of_x0]);
+
+            correct_answer = string.Format("limit({0}, x, {1})", question, rad);
+            question = "\\displaystyle " + Helper.Latex(correct_answer, false);
