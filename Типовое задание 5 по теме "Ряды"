@@ -1,0 +1,151 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+
+string question,correct_answer,func;
+Random rnd = new Random();
+int k=rnd.Next(0,2);
+
+
+if (k == 0){
+    string power;
+    string [] gamma={"1","2","3","1/2","1/3"};
+    power=Helper.Eval(string.Format("simplify({0}*n**({1}))",gamma[rnd.Next(0,5)],gamma[rnd.Next(0,3)]));
+    
+    int p=rnd.Next(3,8);
+    int koef1=rnd.Next(2,6);
+    int koef2=rnd.Next(-1,2)+koef1;
+    if (koef1 == koef2){
+        koef2 += 2;
+    }
+    func=string.Format("(({0}*n**{1}+{2})/({3}*n**{4}+{5}))**({6})",koef1,p,rnd.Next(1,9),koef2,
+    p+rnd.Next(-1,2),rnd.Next(1,9),power);
+    
+    int temp=rnd.Next(0,2);
+    if (temp == 0){
+        func = string.Format("n**{0}",rnd.Next(2,9))+"*"+func;
+    }
+}
+else{
+    string [] gamma={"1","2","3","1/2","1/3"};
+    string [] delta={"n**","log","a**"};
+    delta[0]=string.Format("n**({0}*n+{1})",rnd.Next(2,6),rnd.Next(1,6));
+    delta[1]=string.Format("({0}+log((n+{0})**({1})))**(n)",rnd.Next(1,10),gamma[rnd.Next(1,5)]);
+    delta[2]=string.Format("{0}**(n**{1}+{2})",rnd.Next(2,8),rnd.Next(1,4),rnd.Next(0,6));
+    delta[2]=Helper.Eval("simplify("+delta[2]+")");
+    
+    string [] part={"num","den"};
+    int temp=rnd.Next(0,3), j=0;
+    for (int i=0;i<3;i++){
+        if (temp != i){
+            part[j]=delta[i];
+            j++;
+        }
+    }
+    temp=rnd.Next(0,2);
+    if (temp == 0){
+        func = string.Format("({0})/({1})",part[0],part[1]);
+    }
+    else{
+        func = string.Format("({0})/({1})",part[1],part[0]);
+    }
+}
+
+
+
+
+if (Helper.Eval(string.Format("limit(({0})**(1/n), n, +oo) < 1",func)) == "True"){
+    k=1;
+}
+else{
+    k=0;
+}
+
+question="\\sum\\limits_{n=1}^{\\infty}"+" "+Helper.Latex(func,false);
+correct_answer=k+""; 
+
+
