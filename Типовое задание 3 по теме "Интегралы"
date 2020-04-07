@@ -1,0 +1,185 @@
+Random rnd = new Random();
+delegate double MyDelegate(int x,double b);
+delegate string MyDelegate_s(string b);
+
+double f1(int x,double a)
+{
+    return x*a;
+}
+
+double f2(int x,double a)
+{
+    return Math.Pow(x,2)*a;
+}
+
+double f3(int x,double a)
+{
+    return Math.Sqrt(x)*a;
+}
+
+double f4(int x,double a)
+{
+    return a/x;
+}
+
+string f1_s(string a)
+{
+    string s=string.Format("{0}*x",a);
+    return s;
+}
+
+string f2_s(string a)
+{
+    string s=string.Format("{0}*x**2",a);
+    return s;
+}
+
+string f3_s(string a)
+{
+    string s=string.Format("{0}*sqrt(x)",a);
+    return s;
+}
+
+string f4_s(string a)
+{
+    string s=string.Format("{0}/x",a);
+    return s;
+}
+
+int vibor1=rnd.Next(0, 3);
+int vibor2=rnd.Next(0, 3);
+int vibor3=0;
+
+if(vibor1==vibor2)
+{
+        vibor3=vibor1;
+        while (vibor3==vibor1)
+            vibor3=rnd.Next(0,4);
+}            
+else
+    vibor3=3;
+
+double a=0;
+MyDelegate[] funcs = new MyDelegate[4];
+funcs[0] = f1;
+funcs[1] = f2;
+funcs[2] = f3;
+funcs[3] = f4;
+
+MyDelegate_s[] funcs_s = new MyDelegate_s[4];
+funcs_s[0] = f1_s;
+funcs_s[1] = f2_s;
+funcs_s[2] = f3_s;
+funcs_s[3] = f4_s;
+
+int[] sequence = new int[3] {1,4,0};
+int choice=0,x1=0,x2=0;
+if (vibor1==2 || vibor2==2 || vibor3==2)
+{
+    if (vibor1==2)
+    {
+        choice=rnd.Next(0,2);
+        x1=sequence[choice];
+        x2=rnd.Next(x1+1,7);//тут подправить если что
+    }
+    
+    if (vibor2==2)
+    {
+        sequence[0]=4;
+        sequence[1]=9;
+        sequence[2]=16;
+        x1=rnd.Next(1,4);
+        choice=rnd.Next(0,3);
+        x2=sequence[choice];
+    }
+    
+    if ((vibor2==2 && vibor1==2) || vibor3==2)
+    {
+        sequence[0]=1;
+        sequence[1]=4;
+        choice=rnd.Next(0,2);
+        x1=sequence[choice];
+        sequence[0]=9;
+        sequence[1]=16;
+        choice=rnd.Next(0,2);
+        x2=sequence[choice];
+    }
+}
+else
+{
+    x1=rnd.Next(1,4);
+    x2=rnd.Next(x1+1,6);
+}
+
+string a_s="";
+if (vibor1==2 && vibor2==2 && (vibor3==1 || vibor3==0))
+{
+    a=1;
+    a_s=string.Format("{0}",a);
+}
+else
+{
+    a=x1*x2;
+    a_s=string.Format("{0}",a);
+}
+string f3_p=string.Format("{0}",funcs_s[vibor3](a_s));//разобраться с символом симплифай и хелпер
+
+string b=string.Format("{0}/{1}",funcs[vibor3](x1,(double)a),funcs[vibor1](x1,1.0));
+string b_s=Helper.Eval("simplify("+b+")");
+string f1_p=string.Format("{0}",funcs_s[vibor1](b_s));
+
+string c=string.Format("{0}/{1}",funcs[vibor3](x2,(double)a),funcs[vibor2](x2,1.0));
+string c_s=Helper.Eval("simplify("+c+")");
+string f2_p=string.Format("{0}",funcs_s[vibor2](c_s));
+
+string x3=string.Format("{0}",0);
+string sol=Helper.Eval("solve("+f1_p+"-"+f2_p+",x)");
+
+if(sol.Length>3)
+{
+    int i=0,j=1;
+    List<char> s_c3 = new List<char>();
+    while(sol[i+4]!='/')
+    {
+        s_c3.Add(sol[i+4]);
+        i=i+1;
+        if(sol[i+4]==']')
+            break;
+        j=j+1;
+    }
+    var result = new string(s_c3.ToArray());
+    int s_3,count=0;
+    if (int.TryParse(result, out s_3))
+    {
+        count=count+1;
+    }
+    
+    int s_5=1;
+    if(sol[i+4]!=']')
+    {
+        i=i+1;
+        List<char> s_c5 = new List<char>();
+        while(sol[i+4]!=']')
+        {
+            s_c5.Add(sol[i+4]);
+            i=i+1;
+        }
+        var result1 = new string(s_c5.ToArray());
+        if (int.TryParse(result1, out s_5))
+        {
+            count=count+1;
+        }
+
+    }
+    if(((double)s_3/(double)s_5)<x1 && ((double)s_3/(double)s_5)>0)
+        x3=Helper.Eval("simplify("+s_3+"/"+s_5+")");
+}
+
+string I1=Helper.Eval("integrate("+f1_p+"-"+f2_p+", (x, "+x3+", "+x1+"))");
+string I2=Helper.Eval("integrate("+f3_p+"-"+f2_p+", (x, "+x1+", "+x2+"))");
+string sum=string.Format("Abs({0})+Abs({1})",I1,I2);
+
+string x3_s="\\displaystyle " + Helper.Latex(x3); 
+string question1="\\displaystyle " + Helper.Latex(f1_p);
+string question2="\\displaystyle " + Helper.Latex(f2_p);
+string question3="\\displaystyle " + Helper.Latex(f3_p);
