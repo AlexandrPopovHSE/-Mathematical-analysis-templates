@@ -1,0 +1,116 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+
+string question,correct_answer,func;
+Random rnd = new Random();
+int k=rnd.Next(0,2);
+
+int a,b,c,d,e,f,alpha,beta,gamma,delta;
+a=rnd.Next(1,11);
+b=rnd.Next(0,9);
+c=rnd.Next(-(a+b),11);
+d=rnd.Next(1,11);
+e=rnd.Next(0,9);
+f=rnd.Next(-(c+d-1),11);
+
+if (k == 0){
+    beta=rnd.Next(2,4);
+    alpha=beta+rnd.Next(1,7);
+    gamma=alpha+rnd.Next(0,1);
+    delta=rnd.Next(2,gamma);
+}
+else{
+    beta=rnd.Next(2,4);
+    alpha=beta+rnd.Next(1,7);
+    gamma=alpha+rnd.Next(2,5);
+    delta=rnd.Next(2,gamma);
+}
+
+func="("+koef(a,"n**"+alpha,true)+koef(b,"n**"+beta,false)+koef(c,"",false)+")/("+koef(d,"n**("+gamma+")",true)+koef(e,"n**("+delta+")",false)+koef(f,"",false)+")";
+question="\\sum\\limits_{n=1}^{\\infty}"+" "+Helper.Latex(func,false);
+correct_answer=k+""; 
