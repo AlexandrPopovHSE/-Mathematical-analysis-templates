@@ -1,0 +1,134 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+    
+     Random rnd = new Random();
+     string question="",correct_answer="",x0="";
+     int k=rnd.Next(1,9);
+     
+     if (k == 1){
+         x0="E";
+         question="(log(x))**(1/tan(x-E))";
+     }
+     
+     if (k == 2){
+         x0="pi/2";
+         question="(sin(x))**(2*tan(x))";
+     }
+     
+     if (k == 3){
+         x0="0";
+         question="(1-log(cos(x)))**(1/(tan(x-E))**2)";
+     }
+     
+     if (k == 4){
+         x0="pi/2";
+         question="(1+cos(3*x))**(1/cos(x))";
+     }
+     
+     if (k == 5){
+          x0="0";
+         question="(cos(x))**(1/(sin(x))**2)";
+     }
+     
+     if (k == 6){
+          x0="pi/2";
+         question="(2-2*x/pi)**(1/cos(x))";
+     }
+     
+     if (k == 7){
+          x0="pi/4";
+         question="(tan(x))**(cot(x-pi/4))";
+     }
+     
+     if (k == 8){
+          x0="0";
+         question="(1+(sin(3*x))**2)**(1/log(cos(x)))";
+     }
+     
+     correct_answer = string.Format("limit({0}, x, {1})", question, x0);
+     question = "\\displaystyle " + Helper.Latex(correct_answer, false);
