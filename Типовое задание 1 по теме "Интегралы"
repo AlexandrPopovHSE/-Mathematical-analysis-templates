@@ -1,0 +1,409 @@
+Random rnd = new Random();
+string integral="";
+string answer="";
+int k=0;
+k = rnd.Next(1,81);
+
+switch (k)
+{
+    case 1:
+        integral=string.Format("integrate(1/(sqrt((x-1)**3*(x-2))),x)");
+        answer=string.Format("(2*(x-2)*(x-1))/(sqrt((x-2)*((x-1)**3)))");
+        break;
+    
+    case 2:
+        integral=string.Format("integrate(x**3/sqrt(1+x**2),x)");
+        answer=string.Format("((x**2-2)*sqrt(x**2+1))/3");
+        break;
+        
+    case 3:
+        integral=string.Format("integrate(x*asin(1/x),x)");
+        answer=string.Format("(x**2*acsc(x)+sqrt(x**2-1))/2");
+        break;
+    
+    case 4:
+        integral=string.Format("integrate(x*log(x**2+1),x)");
+        answer=string.Format("((x**2+1)*(log(x**2+1)-1))/2");
+        break;
+        
+    case 5:
+        integral=string.Format("integrate((x+1)/(x**2+4)**2,x)");
+        answer=string.Format("x/(8*x**2+32)-1/(2*x**2+8)+atan(x/2)/16");
+        break;
+        
+    case 6:
+        integral=string.Format("integrate((x**3)/(x**3-8),x)");
+        answer=string.Format("-(log(x**2+2*x+4)-2*log(Abs(x-2)))/3-(2*atan((x+1)/sqrt(3)))/sqrt(3)+x");
+        break;  
+        
+    case 7:
+        integral=string.Format("integrate((tan(3*x))**4,x)");
+        answer=string.Format("(tan(3*x)**3-3*tan(3*x))/9+x");
+        break;
+            
+    case 8:
+        integral=string.Format("integrate((sin(x)+1)/(1-cos(x))**2,x)");
+        answer=string.Format("1/(cos(x)-1)-(cot(x/2)*(cot(x/2)**2+3))/6");
+        break;
+        
+    case 9:
+        integral=string.Format("integrate(1/(exp(2*x)-1),x)");
+        answer=string.Format("log(Abs(exp(-2*x)-1))/2");
+        break;
+        
+    case 10:
+        integral=string.Format("integrate(1/(exp(x)-1)**2,x)");
+        answer=string.Format("-log(Abs(exp(x)-1))-1/(exp(x)-1)+x");
+        break;  
+        
+    case 11:
+        integral=string.Format("integrate(1/((x+2)*sqrt(x+1)),x)");
+        answer=string.Format("2*atan(sqrt(x+1))");
+        break; 
+        
+    case 12:
+        integral=string.Format("integrate((x**4*atan(x))/(x**2+1),x)");
+        answer=string.Format("(4*log(x**2+1)+3*atan(x)**2+(2*x**3-6*x)*atan(x)-x**2)/6");
+        break; 
+        
+    case 13:
+        integral=string.Format("integrate(x**2/(x**3+1),x)");
+        answer=string.Format("log(Abs(x**3+1))/3");
+        break;
+        
+    case 14:
+        integral=string.Format("integrate(1/(sin(x)*cos(x)**3),x)");
+        answer=string.Format("(-2*log(Abs(cos(x)))+log(cos(x)+1)+log(1-cos(x))+(1/cos(x))**2)/2");
+        break;
+        
+    case 15:
+        integral=string.Format("integrate(exp(x)*sqrt(exp(2*x)+1),x)");
+        answer=string.Format("(log(sqrt(exp(2*x)+1)+exp(x))+exp(x)*sqrt(exp(2*x)+1))/2");
+        break;
+        
+    case 16:
+        integral=string.Format("integrate(1/((x+1)*sqrt(x**2+1)),x)");
+        answer=string.Format("(log(Abs((sqrt(x**2+1)-1)/x+sqrt(2)-1))-log(Abs((sqrt(x**2+1)-1)/x-sqrt(2)-1)))/sqrt(2)");
+        break;
+        
+    case 17:
+        integral=string.Format("integrate(x*log((1+x)/(1-x)),x)");
+        answer=string.Format("(x**2*log((x+1)/(1-x))-log(Abs(2/(x-1)+1)))/2+x");
+        break;
+        
+    case 18:
+        integral=string.Format("integrate((x**3+2)/(x**4+3*x**2),x)");
+        answer=string.Format("log(x**2+3)/2-(2*atan(x/sqrt(3)))/3**(3/2)-2/(3*x)");
+        break;
+        
+    case 19:
+        integral=string.Format("integrate(cot(x/2)**4,x)");
+        answer=string.Format("x-(2*cot(x/2)**3)/3+2*cot(x/2)");
+        break;
+        
+    case 20:
+        integral=string.Format("integrate(exp(x)*sqrt(exp(2*x)+1),x)");
+        answer=string.Format("(log(sqrt(exp(2*x)+1)+exp(x))+exp(x)*sqrt(exp(2*x)+1))/2");
+        break;
+        
+    case 21:
+        integral=string.Format("integrate(x**7/(sqrt(x**4+1)),x)");
+        answer=string.Format("((x**4-2)*sqrt(x**4+1))/6");
+        break;
+        
+    case 22:
+        integral=string.Format("integrate(atan(x/(x+1)),x)");
+        answer=string.Format("-log((x+1)**2+x^2)/4+x*atan(x/(x+1))+atan(2*x+1)/2");
+        break;
+        
+    case 23:
+        integral=string.Format("integrate(x**2/((x-1)*(x**2-2*x+2)),x)");
+        answer=string.Format("2*atan(x-1)+log(Abs(x-1))");
+        break;
+        
+    case 24:
+        integral=string.Format("integrate(sin(2*x)**6,x)");
+        answer=string.Format("-(sin(12*x)-9*sin(8*x)+45*sin(4*x)-120*x)/384");
+        break;
+        
+    case 25:
+        integral=string.Format("integrate(1/(exp(x)-1)**2,x)");
+        answer=string.Format("-log(Abs(exp(x)-1))-1/(exp(x)-1)+x");
+        break;
+        
+    case 26:
+        integral=string.Format("integrate(sqrt(x**2+4*x+13),x)");
+        answer=string.Format("(9*log(Abs(sqrt((x+2)**2+9)+x+2))+(x+2)*sqrt((x+2)**2+9))/2");
+        break;
+        
+    case 27:
+        integral=string.Format("integrate(x**2*cos(3*x),x)");
+        answer=string.Format("((9*x**2-2)*sin(3*x)+6*x*cos(3*x))/27");
+        break;
+        
+    case 28:
+        integral=string.Format("integrate((x-1)/(4*x**3+x),x)");
+        answer=string.Format("(log(4*x**2+1)+atan(2*x))/2-log(Abs(x))");
+        break;
+        
+    case 29:
+        integral=string.Format("integrate(cot((3*x)/2)**3,x)");
+        answer=string.Format("(2*log(Abs(1/sin((3*x)/2))))/3-1/sin((3*x)/2)**2/3");
+        break;
+        
+    case 30:
+        integral=string.Format("integrate(1/sqrt(exp(2*x)+1),x)");
+        answer=string.Format("(log(sqrt(exp(2*x)+1)-1)-log(sqrt(exp(2*x)+1)+1))/2");
+        break;
+        
+    case 31:
+        integral=string.Format("integrate(1/(sqrt(x)-root(x,3)),x)");
+        answer=string.Format("2*sqrt(x)+3*root(x,3)+6*(root(x,6)+log(Abs(root(x,6)-1)))");
+        break;
+        
+    case 32:
+        integral=string.Format("integrate(atan(1/(sqrt(3)*sqrt(x))),x)");
+        answer=string.Format("atan(1/(sqrt(3)*sqrt(x)))*x+sqrt(x)/sqrt(3)-atan(sqrt(3)*sqrt(x))/3");
+        break;
+        
+    case 33:
+        integral=string.Format("integrate((2*x+1)/(x*(x**2+x+1)),x)");
+        answer=string.Format("log(Abs(x))-log(x**2+x+1)/2+sqrt(3)*atan((2*x+1)/sqrt(3))");
+        break;
+        
+    case 34:
+        integral=string.Format("integrate(1/(sin(x)+2),x)");
+        answer=string.Format("(2*atan((2*tan(x/2)+1)/sqrt(3)))/sqrt(3)");
+        break;
+        
+    case 35:
+        integral=string.Format("integrate(exp(sqrt(x+1)),x)");
+        answer=string.Format("2*(sqrt(x+1)-1)*exp(sqrt(x+1))");
+        break;
+        
+    case 36:
+        integral=string.Format("(1+root(x,3))**2/(1+x),x)");
+        answer=string.Format("(3*(x**(2/3)+4*root(x,3)+log(x**(2/3)-root(x,3)+1)-2*sqrt(3)*atan((2*root(x,3)-1)/sqrt(3))))/2");
+        break;
+        
+    case 37:
+        integral=string.Format("integrate((x*log(x))/((x**2-1)*sqrt(x**2-1)),x)");
+        answer=string.Format("atan(sqrt(x**2-1))-log(x)/sqrt(x**2-1)");
+        break;
+        
+    case 38:
+        integral=string.Format("integrate((2*x**2-5)/((x-2)*(x**2-x-12)),x)");
+        answer=string.Format("(13*log(Abs(x+3)))/35-(3*log(Abs(x-2)))/10+(27*log(Abs(x-4)))/14");
+        break;
+        
+    case 39:
+        integral=string.Format("integrate(1/(3*sin(x)-5*cos(x)+4),x)");
+        answer=string.Format("(log(Abs(3*tan(x/2)-sqrt(2)+1))-log(Abs(3*tan(x/2)+sqrt(2)+1)))/(3*sqrt(2))");
+        break;
+        
+    case 40:
+        integral=string.Format("integrate(exp(3*x)*(x**2-6*x+2),x)");
+        answer=string.Format("((9*x**2-60*x+38)*exp(3*x))/27");
+        break; 
+        
+    case 41:
+        integral=string.Format("integrate((x+sqrt(1+x))/root(1+x,3),x)");
+        answer=string.Format("(3*(20*(x+1)**(7/6)+7*(x+1)**(2/3)*(2*x-3)))/70");
+        break; 
+        
+    case 42:
+        integral=string.Format("integrate(x**2*log(1+x**2),x)");
+        answer=string.Format("(x*(x**2*(3*log(x**2+1)-2)+6)-6*atan(x))/9");
+        break;
+        
+    case 43:
+        integral=string.Format("integrate(x/((x+1)*(x**2+1)),x)");
+        answer=string.Format("(2*(atan(x)-log(Abs(x+1)))+log(x**2+1))/4");
+        break;
+        
+    case 44:
+        integral=string.Format("integrate(1/(cos(x)*sin(x)**3),x)");
+        answer=string.Format("-(-2*log(Abs(sin(x)))+log(sin(x)+1)+log(1-sin(x))+1/sin(x)**2)/2");
+        break;
+        
+    case 45:
+        integral=string.Format("integrate(1/(exp(2*x)+exp(x)),x)");
+        answer=string.Format("log(exp(x)+1)-exp(-x)-x");
+        break;
+        
+    case 46:
+        integral=string.Format("integrate(1/(x*(x**2+1)),x)");
+        answer=string.Format("-log(1/x**2+1)/2");
+        break;
+        
+    case 47:
+        integral=string.Format("integrate(log(x-3)**2,x)");
+        answer=string.Format("(log(x-3)**2-2*log(x-3)+2)*(x-3)");
+        break;
+        
+    case 48:
+        integral=string.Format("integrate(1/((x-1)**2(x**2+1)),x)");
+        answer=string.Format("((log(x**2+1)-2*log(Abs(x-1)))/4-1/(2*(x-1))");
+        break;
+        
+    case 49:
+        integral=string.Format("integrate(1/(cos(x)*sin(x)**3),x)");
+        answer=string.Format("-(-2*log(Abs(sin(x)))+log(sin(x)+1)+log(1-sin(x))+1/sin(x)**2)/2");
+        break;
+        
+    case 50:
+        integral=string.Format("integrate(exp(x/2)*(x**2+2),x)");
+        answer=string.Format("2*(x**2-4*x+10)*exp(x/2)");
+        break;
+        
+    case 51:
+        integral=string.Format("integrate((2*x+1)*sqrt(x**2+4*x+13),x)");
+        answer=string.Format("(sqrt(x**2+4*x+13)*(4*x**2+7*x+34)-81*log(Abs(sqrt(x**2+4*x+13)+x+2)))/6");
+        break;
+        
+    case 52:
+        integral=string.Format("integrate(atan(sqrt(x)),x)");
+        answer=string.Format("atan(sqrt(x))*(x+1)-sqrt(x)");
+        break;
+        
+    case 53:
+        integral=string.Format("integrate((2*x+1)/(x**3-1),x)");
+        answer=string.Format("-log(x**2+x+1)/2+atan((2*x+1)/sqrt(3))/sqrt(3)+log(Abs(x-1))");
+        break;
+        
+    case 54:
+        integral=string.Format("integrate((sin(2*x))/(2+3*cos(x)),x)");
+        answer=string.Format("(4*log(Abs(3*cos(x)+2))-6*cos(x))/9");
+        break;
+        
+    case 55:
+        integral=string.Format("integrate(sqrt(exp(2*x)+1),x)");
+        answer=string.Format("(log(sqrt(exp(2*x)+1)-1)-log(sqrt(exp(2*x)+1)+1))/2+sqrt(exp(2*x)+1)");
+        break;
+        
+    case 56:
+        integral=string.Format("integrate((5*x-3)/((x-2)*(3*x**2+2*x-1)),x)");
+        answer=string.Format("(3*log(Abs(3*x-1))-10*log(Abs(x+1))+7*log(Abs(x-2)))/15");
+        break;
+        
+    case 57:
+        integral=string.Format("integrate(1/(6*x**3-7*x**2-3*x),x)");
+        answer=string.Format("(9*log(Abs(3*x+1))+2*log(Abs(2*x-3))-11*log(Abs(x)))/33");
+        break;
+        
+    case 58:
+        integral=string.Format("integrate((x**2+2)/((x-1)*(x+1)**2),x)");
+        answer=string.Format("(log(Abs(x+1))+3*log(Abs(x-1)))/4+3/(2*(x+1))");
+        break;
+        
+    case 59:
+        integral=string.Format("integrate((x**2+1)/(x*(x-1)**3),x)");
+        answer=string.Format("-log(Abs(x))-1/(x-1)**2+log(Abs(x-1))");
+        break;
+        
+    case 60:
+        integral=string.Format("integrate((x**3)/((x**3+1)*(x+1)),x)");
+        answer=string.Format("(4*log(Abs(x+1))+log(x**2-x+1))/6-atan((2*x-1)/sqrt(3))/3**(3/2)+1/(3*x+3)");
+        break;
+        
+    case 61:
+        integral=string.Format("integrate(x/sqrt(1+root(x**2,3)),x)");
+        answer=string.Format("-(sqrt(x**(2/3)+1)*(-3*x**(4/3)+4*x**(2/3)-8))/5");
+        break; 
+        
+    case 62:
+        integral=string.Format("integrate(x**2*root((x+1)**2,3),x)");
+        answer=string.Format("(3*(x+1)**(5/3)*(20*x**2-15*x+9))/220");
+        break; 
+        
+    case 63:
+        integral=string.Format("integrate((1-x+x**2)/sqrt(1+x-x**2),x)");
+        answer=string.Format("-((4*x-2)*sqrt(-x**2+x+1)-11*asin((2*x-1)/sqrt(5)))/8");
+        break;
+        
+    case 64:
+        integral=string.Format("integrate(x**3/sqrt(1+x+x**2),x)");
+        answer=string.Format("(21*log(Abs(2*sqrt(x**2+x+1)+2*x+1))+sqrt(x**2+x+1)*(16*x**2-20*x-2))/48");
+        break;
+        
+    case 65:
+        integral=string.Format("integrate(1/(sqrt(x)+root(x**2,3)),x)");
+        answer=string.Format("3*root(x,3)-6*root(x,6)+6*log(root(x,6)+1)");
+        break;
+        
+    case 66:
+        integral=string.Format("integrate((x*log(x))**2/sqrt(x),x)");
+        answer=string.Format("(2*x**(5/2)*(25*log(x)**2-20*log(x)+8))/125");
+        break;
+        
+    case 67:
+        integral=string.Format("integrate((log(x)-1)/(log(x)**2),x)");
+        answer=string.Format("x/log(x)");
+        break;
+        
+    case 68:
+        integral=string.Format("integrate((log(x))/(log(x)+1)**2,x)");
+        answer=string.Format("x/(log(x)+1)");
+        break;
+        
+    case 69:
+        integral=string.Format("integrate(sqrt(x)*atan(sqrt(x)),x)");
+        answer=string.Format("(log(x+1)+2*atan(sqrt(x))*x**(3/2)-x)/3");
+        break;
+        
+    case 70:
+        integral=string.Format("integrate(x*sin(x)*cos(2*x),x)");
+        answer=string.Format("(sin(3*x)-3*x*(cos(3*x)-3*cos(x))-9*sin(x))/18");
+        break;
+        
+    case 71:
+        integral=string.Format("integrate(1/(1+4*cos(x)),x)");
+        answer=string.Format("(log(Abs(3*tan(x/2)+sqrt(15)))-log(Abs(3*tan(x/2)-sqrt(15))))/sqrt(15)");
+        break;
+        
+    case 72:
+        integral=string.Format("integrate((1+tan(x))/(sin(2*x)),x)");
+        answer=string.Format("(log(Abs(tan(x)))+tan(x))/2");
+        break;
+        
+    case 73:
+        integral=string.Format("integrate((sin(x)**4)/(cos(x)),x)");
+        answer=string.Format("(6*log(sin(x)+1)-6*log(1-sin(x))+sin(3*x)-15*sin(x))/12");
+        break;
+        
+    case 74:
+        integral=string.Format("integrate(tan(x)**5,x)");
+        answer=string.Format("log(Abs(1/cos(x)))+1/cos(x)**4/4-1/cos(x)**2");
+        break;
+        
+    case 75:
+        integral=string.Format("integrate(1/sin(x)**4,x)");
+        answer=string.Format("-cot(x)**3/3-cot(x)");
+        break;
+        
+    case 76:
+        integral=string.Format("integrate(1/(exp(x)-1)**4,x)");
+        answer=string.Format("-log(Abs(exp(x)-1))-1/(exp(x)-1)+1/(2*(exp(x)-1)^2)-1/(3*(exp(x)-1)^3)+x");
+        break;
+            
+    case 77:
+        integral=string.Format("integrate((2*x+5)/exp(x),x)");
+        answer=string.Format("-(2*x+7)*exp(-x)");
+        break;
+        
+    case 78:
+        integral=string.Format("integrate(exp(x/2)*(x**2+2),x)");
+        answer=string.Format("2*(x**2-4*x+10)*exp(x/2)");
+        break;
+        
+    case 79:
+        integral=string.Format("integrate(3*exp(2*x)*sin(x),x)");
+        answer=string.Format("(3*exp(2*x)*(2*sin(x)-cos(x)))/5");
+        break;
+        
+    case 80:
+        integral=string.Format("integrate(x*exp(sqrt(x)),x)");
+        answer=string.Format("2*(sqrt(x)*(x+6)-3*x-6)*exp(sqrt(x))");
+        break;
+}
+string question="\\displaystyle " + Helper.Latex(integral,false);
