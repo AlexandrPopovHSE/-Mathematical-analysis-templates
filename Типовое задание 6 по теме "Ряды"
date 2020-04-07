@@ -1,0 +1,152 @@
+string question,correct_answer,func;
+
+Random rnd = new Random();
+int k=rnd.Next(0,27);
+int ans,a;
+
+switch (k){
+case 0:
+a = 3;
+func = "\\frac 1 {(n+7)\\ln^2(n-1)}";
+ans = 1;
+break;
+case 1:
+a = 9;
+func = "\\frac 5 {n \\ln n \\ln ^2 \\ln n}";
+ans = 1;
+break;
+case 2:
+a = 1;
+func = "\\frac 1 {n \\sqrt{\\ln (3n-1)}}";
+ans = 0;
+break;
+case 3:
+a = 1;
+func = "\\frac 1 {n \\ln^3 (5n+1)}";
+ans = 1;
+break;
+case 4:
+a = 1;
+func = "\\frac n {(n^2+1)\\ln(n+1)}";
+ans = 0;
+break;
+case 5:
+a = 8;
+func = "\\frac 1 {n \\ln n \\ln ^5 (n+1)}";
+ans = 1;
+break;
+case 6:
+a = 1;
+func = "\\frac {\\tan \\frac 1 n} {\\sqrt[5]{\\ln (n+1)}}";
+ans = 0;
+break;
+case 7:
+a = 2;
+func = "\\frac {\\ln \\left(\\frac {n+3} n\\right)} {\\ln n}";
+ans = 0;
+break;
+case 8:
+a = 1;
+func = "\\frac {3^{-\\sqrt n}} {\\sqrt n}";
+ans = 1;
+break;
+case 9:
+a = 1;
+func = "\\frac {\\arctan \\frac 1 n} {\\sqrt{\\ln(n+1)}}";
+ans = 0;
+break;
+case 10:
+a = 2;
+func = "\\frac {\\ln(n+1)-\\ln n} {\\ln^5 n}";
+ans = 1;
+break;
+case 11:
+a = 2;
+func = "\\frac {n^2} {(n^3+3)\\ln n}";
+ans = 0;
+break;
+case 12:
+a = 2;
+func = "\\frac{(1-\\frac 1 {\\sqrt n})^7-1}{\\sqrt n \\ln n} ";
+ans = 0;
+break;
+case 13:
+a = 9;
+func = "\\frac {\\ln (\\frac {n+1} n)}{\\ln n \\ln (\\ln n)}";
+ans = 0;
+break;
+case 14:
+a = 2;
+func = "\\frac{\\arcsin \\frac 1 {\\sqrt n}}{\\sqrt n \\sqrt[4]{\\ln n}}";
+ans = 0;
+break;
+case 15:
+a = 1;
+func = "\\frac{\\sin \\frac 2 {\\sqrt n}}{\\sqrt n \\ln (n+2)}";
+ans = 0;
+break;
+case 16:
+a = 2;
+func = "\\frac {n^2}{(n^3-1)\\ln n}";
+ans = 0;
+break;
+case 17:
+a = 1;
+func = "\\frac 1 {n \\ln n \\sqrt[7]{\\ln(n+2)}}";
+ans = 1;
+break;
+case 18:
+a = 1;
+func = "\\frac {\\sqrt n \\arctan \\frac 1 n} {e^{\\sqrt n}}";
+ans = 1;
+break;
+case 19:
+a = 2;
+func = "\\frac {n} {(n^2+1)(\\ln \\sqrt[5] n)^2}";
+ans = 1;
+break;
+case 20:
+a = 1;
+func = "\\frac {\\sin \\frac 1 n} {5^{\\ln n}}";
+ans = 1;
+break;
+case 21:
+a = 1;
+func = "\\frac {n(1-\\cos \\frac 1 n)} {\\ln(2n+1)}";
+ans = 0;
+break;
+case 22:
+a = 2;
+func = "\\frac {\\ln(n+1)-\\ln n} {\\sqrt[7]{\\ln n}}";
+ans = 0;
+break;
+case 23:
+a = 2;
+func = "\\frac {n^2-1} {(n^3-1)\\ln \\sqrt[5] n}";
+ans = 0;
+break;
+case 24:
+a = 1;
+func = "2^{2 \\ln n} \\arctan \\frac {\\pi} n";
+ans = 0;
+break;
+case 25:
+a = 1;
+func = "(\\ln 2)^n 3^{-\\sqrt n}";
+ans = 1;
+break;
+case 26:
+a = 1;
+func = "3^{- \\ln n}(e^{\\frac 1 n} - 1)";
+ans = 1;
+break;
+}
+
+
+
+
+
+
+
+question="\\sum\\limits_{n="+a+"}^{\\infty}"+" "+func;
+correct_answer=ans+""; 
