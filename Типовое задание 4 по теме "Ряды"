@@ -1,0 +1,140 @@
+static string koef(int k, string temp, bool f){
+            string mono="";
+            if (f == false)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = "+" + temp;
+                        }
+                        else
+                        {
+                            mono = "+" + k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "+" + k;
+                    }
+                    if (k < 0)
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+
+            if (f == true)
+            {
+                if (temp != "")
+                {
+                    if (k > 0)
+                    {
+                        if (k == 1)
+                        {
+                            mono = temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+
+                    if (k < 0)
+                    {
+                        if (k == -1)
+                        {
+                            mono = "-" + temp;
+                        }
+                        else
+                        {
+                            mono = k + "*" + temp;
+                        }
+                    }
+                }
+                else
+                {
+                    if (k > 0)
+                    {
+                        mono = "" + k;
+                    }
+                    else
+                    {
+                        mono = "" + k;
+                    }
+                }
+            }
+            
+
+            return mono;
+    }
+
+string question,correct_answer,func;
+Random rnd = new Random();
+int k=rnd.Next(0,11);
+switch (k){
+    case 0:
+    func=string.Format("(factorial(n+{0}))/({1}**n*factorial(n-{0}))",rnd.Next(1,4),rnd.Next(2,10));
+    break;
+    case 1:
+    func=string.Format("(factorial(n))/({0}*factorial(factorial(n)))",rnd.Next(2,10));
+    break;
+    case 2:
+    func=string.Format("(n**({0}*n))/(factorial(n)**{1})",rnd.Next(2,10),rnd.Next(2,10));
+    break;
+    case 3:
+    func=string.Format("(factorial({0}*n))/({1}**(n**{2}))",rnd.Next(2,8),rnd.Next(2,8),rnd.Next(2,8));
+    break;
+    case 4:
+    func=string.Format("(factorial(n)**{0})/(factorial({1}*n))",rnd.Next(2,8),rnd.Next(2,8));
+    break;
+    case 5:
+    func=string.Format("(factorial(n)*factorial(n+{0}))/(factorial({1}*n-1))",rnd.Next(1,8),rnd.Next(2,10));
+    break;
+    case 6:
+    func=string.Format("({0}**n*factorial(n))/(n**({1}*n))",rnd.Next(2,10),rnd.Next(2,10));
+    break;
+    case 7:
+    func=string.Format("(factorial(n-{0})*factorial(n+{0}))/({1}*factorial(n))",rnd.Next(1,10),rnd.Next(2,10));
+    break;
+    case 8:
+    func=string.Format("(factorial(n+{0}))/({1}**n*factorial(n))",rnd.Next(1,4),rnd.Next(2,10));
+    break;
+    case 9:
+    func=string.Format("(factorial(n-{0})*factorial(n-{1}))/(factorial({2}*n))",rnd.Next(1,4),rnd.Next(4,10),rnd.Next(2,8));
+    break;
+    case 10:
+    int s=rnd.Next(2,5);
+    func=string.Format("(factorial(n)*factorial({0}*n))/(factorial({1}*n))",s,s+rnd.Next(1,5));
+    break;
+    
+}
+
+
+
+if (Helper.Eval(string.Format("limit(({0}).subs(n,n+1)/({0}), n, +oo) < 1",func)) == "True"){
+    k=1;
+}
+else{
+    k=0;
+}
+
+question="\\sum\\limits_{n=1}^{\\infty}"+" "+Helper.Latex(func,false);
+correct_answer=k+""; 
