@@ -1,0 +1,133 @@
+Random rnd = new Random();
+delegate string MyDelegate(string x);
+
+string f1(string x)
+{
+    string s=Helper.Eval("sin("+x+")");
+    return s;
+}
+
+string f2(string x)
+{
+    string s=Helper.Eval("cos("+x+")");
+    return s;
+}
+
+string f3(string x)
+{
+    string s=Helper.Eval("tan("+x+")");
+    return s;
+}
+
+string f4(string x)
+{
+    string s=Helper.Eval("cot("+x+")");
+    return s;
+}
+
+string f5(string x,string d,string e)
+{
+    string s=string.Format("{0}*({1})**2+{2}*({3})",d,x,e,x);
+    return s;
+}
+
+MyDelegate[] funcs = new MyDelegate[4];
+funcs[0] = f1;
+funcs[1] = f2;
+funcs[2] = f3;
+funcs[3] = f4;
+
+int[] angles_lim = new int[5] {0,30,45,60,90};
+int choice1=0, choice2=0,angle_choice=0 ;
+choice1=rnd.Next(0,4);
+choice2=choice1;
+while (choice2==choice1)
+        choice2=rnd.Next(0,4);
+
+angle_choice= rnd.Next(0,5);
+string x_string_angle=Helper.Eval("simplify("+angles_lim[angle_choice]+"*pi/180)");
+
+string a="";
+string b="";
+string x="x";
+
+if((funcs[choice1](x_string_angle)==funcs[choice2](x_string_angle)) && angle_choice==2)
+{
+    a=string.Format("{0}",funcs[choice1](x));
+    b=string.Format("-{0}",funcs[choice2](x));
+}
+else
+{
+    if(funcs[choice1](x_string_angle)=="0")
+    {
+        if(choice1==2 || choice1==3)
+        {
+            a=string.Format("{0}",funcs[choice1](x));
+            b=string.Format("{0}",0);
+        }    
+        if(choice1==0 || choice1==1)
+        {
+            while(funcs[choice1](x_string_angle)=="0")
+            {
+                angle_choice= rnd.Next(0,5);
+                x_string_angle=Helper.Eval("simplify("+angles_lim[angle_choice]+"*pi/180)");
+            }
+            a=string.Format("{0}",funcs[choice1](x));
+            b=string.Format("-{0}",funcs[choice1](x_string_angle));
+        }    
+    }            
+    else
+    {
+        string id_angle=Helper.Eval("simplify("+angles_lim[4]+"*pi/180)");;
+        if(funcs[choice1](x_string_angle)==funcs[2](id_angle))
+        {
+            angles_lim=new int[5] {30,45,60,0,0};
+            angle_choice= rnd.Next(0,3);
+            x_string_angle=Helper.Eval("simplify("+angles_lim[angle_choice]+"*pi/180)");
+        }
+        a=string.Format("{0}",funcs[choice1](x));
+        b=string.Format("-{0}",funcs[choice1](x_string_angle));
+    }
+}        
+string numerator=Helper.Eval(""+a+"+"+b+"");
+
+string f="";
+string e_s="";
+string d_s="";
+string denominator="";
+int d=0,e=0;
+if(x_string_angle=="0")
+{
+    int [] roots=new int[5] {1,2,3,4,5};
+    int root_choice=0;
+    root_choice= rnd.Next(0,5);
+    f=string.Format("{0}",roots[root_choice]);
+    e_s=string.Format("{0}**2/x",f);
+    d=rnd.Next(0,11);
+    d_s=string.Format("{0}",d);
+    denominator=Helper.Eval("sqrt("+f5(x,d_s,e_s)+")-"+f+"");
+}
+else
+{
+    d=rnd.Next(0,3);
+    d_s=string.Format("{0}",d);
+    e=rnd.Next(0,3);
+    if(d==0 && e==0)
+            e=rnd.Next(0,3);
+
+    if(d!=0 && e!=0)
+    {
+        e_s=Helper.Eval("-("+f5(x_string_angle,d_s,"0")+")/("+x_string_angle+")");
+        denominator=Helper.Eval(""+f5(x,d_s,e_s)+"");
+    }
+    else
+    {
+    e_s=string.Format("{0}",e);
+    f=Helper.Eval("-("+f5(x_string_angle,d_s,e_s)+")");
+    denominator=Helper.Eval(""+f5(x,d_s,e_s)+"+"+f+"");
+    }
+}
+
+string question=string.Format("(({0})/({1}))",numerator,denominator);
+string answer=string.Format("limit({0}, x, {1})",question,x_string_angle);
+question="\\displaystyle " + Helper.Latex(answer,false);
